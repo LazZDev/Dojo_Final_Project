@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!-- Document metadata -->
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <!-- Document title -->
+        <title>Free Games</title>
+        <!-- External CSS stylesheet -->
+        <link
+            rel="stylesheet"
+            href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+            integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+            crossorigin="anonymous"
+        />
+    </head>
+    <body>
+        <!-- Flex container with two forms -->
+        <div class="d-flex justify-content-around mt-5">
+            <!-- Registration form -->
+            <form
+                action="/register"
+                method="post"
+                class="col-2 p-3 bg-dark text-light"
+            >
+                <!-- Registration form title -->
+                <h2 class="text-primary">Register</h2>
+                <!-- Flash messages for registration errors -->
+                {% with messages =
+                get_flashed_messages(category_filter=['register']) %} {% if
+                messages %}
+                <div class="alert alert-danger" role="alert">
+                    <!-- Flash message header -->
+                    <strong>Please try again!!!</strong>
+                    <!-- Loop through each flash message -->
+                    {% for message in messages %}
+                    <!-- Display flash message -->
+                    <p>{{message}}</p>
+                    {% endfor %}
+                </div>
+                {% endif %} {% endwith %}
+                <!-- First Name input field -->
+                <div class="form-group">
+                    <label for="first_name">First Name:</label>
+                    <!-- User enters their first name here -->
+                    <input type="text" name="first_name" class="form-control" />
+                </div>
+                <!-- Last Name input field -->
+                <div class="form-group">
+                    <label for="last_name">Last Name:</label>
+                    <!-- User enters their last name here -->
+                    <input type="text" name="last_name" class="form-control" />
+                </div>
+                <!-- Email input field -->
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <!-- User enters their email address here -->
+                    <input type="text" name="email" class="form-control" />
+                </div>
+                <!-- Password input field -->
+                <div class="form-group">
+                    <label for="password">Password:</label>
+                    <!-- User enters their password here (masked) -->
+                    <input
+                        type="password"
+                        name="password"
+                        class="form-control"
+                    />
+                </div>
+                <!-- Confirm Password input field -->
+                <div class="form-group">
+                    <label for="confirm_password">Confirm Password:</label>
+                    <!-- User confirms their password (masked) -->
+                    <input
+                        type="password"
+                        name="confirm_password"
+                        class="form-control"
+                    />
+                </div>
+                <!-- Register submit button -->
+                <!-- Upon clicking, the form data will be submitted to the "/register" endpoint -->
+                <input type="submit" value="Register" class="btn btn-primary" />
+            </form>
+            <!-- Login form -->
+            <form
+                action="/login"
+                method="post"
+                class="col-2 p-3 bg-dark text-light"
+            >
+                <!-- Login form title -->
+                <h2 class="text-success">Login</h2>
+                <!-- Flash messages for login errors -->
+                {% with messages =
+                get_flashed_messages(category_filter=['login']) %} {% if
+                messages %}
+                <div class="alert alert-danger" role="alert">
+                    <!-- Flash message header -->
+                    <strong>Please try again</strong>
+                    <!-- Loop through each flash message -->
+                    {% for message in messages %}
+                    <!-- Display flash message -->
+                    <p>{{message}}</p>
+                    {% endfor %}
+                </div>
+                {% endif %} {% endwith %}
+                <!-- Email input field -->
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <!-- User enters their email address here -->
+                    <input type="text" name="email" class="form-control" />
+                </div>
+                <!-- Password input field -->
+                <div class="form-group">
+                    <label for="password">Password:</label>
+                    <!-- User enters their password here (masked) -->
+                    <input
+                        type="password"
+                        name="password"
+                        class="form-control"
+                    />
+                </div>
+                <!-- Login submit button -->
+                <!-- Upon clicking, the form data will be submitted to the "/login" endpoint -->
+                <input type="submit" value="Login" class="btn btn-success" />
+            </form>
+        </div>
+    </body>
+</html>
