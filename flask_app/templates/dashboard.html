@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!-- Document metadata -->
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <!-- Document title -->
+        <title>Free Games World</title>
+        <!-- External CSS stylesheet -->
+        <link
+            rel="stylesheet"
+            href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+            integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+            crossorigin="anonymous"
+        />
+    </head>
+    <body>
+        <!-- Navigation bar -->
+        <nav
+            class="d-flex justify-content-between align-items-center col-12 mt-2"
+        >
+            <!-- Welcome message with user's first name -->
+            <h1 class="text-black ml-5">
+                Welcome to Free Games World, {{ user.first_name }}!!!
+            </h1>
+            <!-- Button link for logging out -->
+            <div class="d-flex col-3 justify-content-around">
+                <a href="/logout" class="btn btn-info ml-5">Logout</a>
+            </div>
+        </nav>
+        <br />
+        <!-- Container for the games library table -->
+        <div class="col-11">
+            <!-- games library table -->
+            <!-- Table header for games library -->
+            <h2><p class="text-black ml-5">Games Library</p></h2>
+            <table
+                class="table-bordered table-hover col-12 ml-5 font-weight-bold border-dark"
+            >
+                <!-- Table header -->
+                <thead class="bg-secondary">
+                    <!-- Table header row -->
+                    <tr>
+                        <td>Title</td>
+                        <td>Genre</td>
+                        <td>Rating</td>
+                        <td>Description</td>
+                        <td>Release Date</td>
+                        <td>Developer</td>
+                        <td>Publisher</td>
+                        <td>Platform</td>
+                    </tr>
+                </thead>
+                <tbody class="">
+                    <!-- Loop through each Games -->
+                    {% for game in all_games %}
+                    <tr>
+                        <!-- Display game title -->
+                        <td class="col-3">
+                            <p><b>{{ game.title }}</b></p>
+                        </td>
+                        <!-- Display game genre -->
+                        <td>
+                            <p>{{ game.genre }}</p>
+                        </td>
+                        <!-- Display game rating -->
+                        <td>
+                            <p>{{ game.rating }}</p>
+                        </td>
+                        <!-- Display game description -->
+                        <td>
+                            <p>{{ game.description }}</p>
+                        </td>
+                        <!-- Display game release date -->
+                        <td>
+                            <p>{{ game.release_date }}</p>
+                        </td>
+                        <!-- Display game developer -->
+                        <td>
+                            <p>{{ game.developer }}</p>
+                        </td>
+                        <!-- Display game publisher -->
+                        <td>
+                            <p>{{ game.publisher }}</p>
+                        </td>
+                        <td>
+                            <p>
+                                {{ game.user.first_name }} {{
+                                game.user.last_name }}
+                            </p>
+                        </td>
+                        <!-- Check if the current user is the creator of the game -->
+                        <td>
+                            {% if game.user_id == session.user_id %}
+                            <!-- If the user is the creator, show links for editing and deleting the game -->
+                            <a
+                                class="btn btn-warning mr-2"
+                                href="/edit_game/{{ game.id }}"
+                                >edit</a
+                            >
+                            <a
+                                class="btn btn-danger"
+                                href="/delete_game/{{ game.id }}"
+                                >delete</a
+                            >
+                            <!-- If the user is not the creator of the game -->
+                            {% elif game.user_id != session.user_id %}
+                            <!-- show only a link for viewing the game details -->
+                            <a
+                                class="btn btn-primary mr-3"
+                                href="/show_game/{{ game.id }}"
+                                >view</a
+                            >
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <div>
+                <a href="/new_game" class="btn btn-success float-right mt-2"
+                    >Add a Game</a
+                >
+            </div>
+        </div>
+    </body>
+</html>
