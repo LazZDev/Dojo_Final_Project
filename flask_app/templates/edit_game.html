@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!-- Document metadata -->
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <!-- Document title -->
+        <title>Free Games World</title>
+        <!-- External CSS stylesheet -->
+        <link
+            rel="stylesheet"
+            href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+            integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+            crossorigin="anonymous"
+        />
+    </head>
+    <body>
+        <!-- Navigation bar -->
+        <nav
+            class="d-flex justify-content-between align-items-center col-12 mt-3"
+        >
+            <!-- !Title message - "Edit title" -->
+            <h2 class="card-text">Edit {{ edit.title }}</h2>
+            <!-- Buttons -->
+            <div class="d-flex col-3 justify-content-around">
+                <!-- Button to go back to the games library dashboard -->
+                <a href="/dashboard" class="btn btn-primary">Dashboard</a>
+                <!-- Button to log out -->
+                <a href="/logout" class="btn btn-info">Logout</a>
+            </div>
+        </nav>
+        <!-- Edit game form -->
+        <form
+            action="/update_game"
+            method="post"
+            class="col-11 p-4 my-4 text-dark font-weight-bold border-dark"
+        >
+            <!-- Hidden input field for game ID -->
+            <input type="hidden" name="id" value="{{edit.id}}" />
+            <!-- Flash messages for game-related errors -->
+            {% with messages = get_flashed_messages(category_filter=['game']) %}
+            {% if messages %} {% for message in messages %}
+            <!-- Display flash messages -->
+            <p>{{message}}</p>
+            {% endfor %} {% endif %} {% endwith %}
+            <div class="d-flex justify-content-between col-10">
+                <div class="col-4">
+                    <!-- Input field for game title with the existing value populated for editing -->
+                    <div class="form-group">
+                        <label for="title">Title:</label>
+                        <input
+                            type="text"
+                            name="title"
+                            class="form-control"
+                            value="{{edit.title}}"
+                        />
+                    </div>
+                    <!-- Input field for game genre with the existing value populated for editing -->
+                    <div class="form-group">
+                        <label for="genre">Genre:</label>
+                        <input
+                            type="text"
+                            name="genre"
+                            class="form-control"
+                            value="{{edit.genre}}"
+                        />
+                    </div>
+                    <!-- Input field for game rating with the existing value populated for editing -->
+                    <div class="form-group">
+                        <label for="rating">Rating:</label>
+                        <input
+                            type="text"
+                            name="rating"
+                            class="form-control"
+                            value="{{edit.rating}}"
+                        />
+                    </div>
+                    <!-- Textarea for game description with the existing value populated for editing -->
+                    <div class="form-group">
+                        <label for="description">Description</label>
+                        <textarea
+                            name="description"
+                            class="form-control"
+                            cols="30"
+                            rows="10"
+                        >
+{{edit.description}}</textarea
+                        >
+                    </div>
+                    <br />
+                    <!-- Submit button to update the game -->
+                    <input
+                        type="submit"
+                        value="Update"
+                        class="btn btn-success"
+                    />
+                </div>
+            </div>
+        </form>
+    </body>
+</html>

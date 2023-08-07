@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!-- Document metadata -->
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <!-- Document title -->
+        <title>Free Games World</title>
+        <!-- External CSS stylesheet -->
+        <link
+            rel="stylesheet"
+            href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+            integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+            crossorigin="anonymous"
+        />
+    </head>
+    <body>
+        <!-- Navigation bar -->
+        <nav
+            class="d-flex justify-content-between align-items-center col-12 mt-2"
+        >
+            <!-- Welcome message -->
+            <h1 class="ml-5">Game Information</h1>
+            <!-- Buttons -->
+            <div class="d-flex col-3 justify-content-around">
+                <!-- Button to go back to the games library dashboard -->
+                <a href="/dashboard" class="btn btn-primary float-right"
+                    >Dashboard</a
+                >
+                <!-- Button to log out -->
+                <a href="/logout" class="btn btn-info float-right">Logout</a>
+            </div>
+        </nav>
+        <div
+            class="card col-9 mx-auto my-5 text-dark font-weight-bold border-dark"
+        >
+            <div class="card-body">
+                <!-- game title -->
+                <h2 class="card-text">Title: {{ game.title }}</h2>
+                <br />
+                <!-- game genre -->
+                <h4 class="card-text">Genre: {{ game.genre }}</h4>
+                <br />
+                <!-- game rating -->
+                <h4 class="card-text">Rating: {{ game.rating }}</h4>
+                <br />
+                <!-- game description -->
+                <h4 class="card-text">Description: {{ game.description }}</h4>
+                <br />
+                <!-- game release date -->
+                <h4 class="card-text">Release Date: {{ game.release_date }}</h4>
+                <br />
+                <!-- game developer -->
+                <h4 class="card-text">Developer: {{ game.developer }}</h4>
+                <br />
+                <!-- game publisher -->
+                <h4 class="card-text">Publisher: {{ game.publisher }}</h4>
+                <br />
+                <!-- game platform -->
+                <h4 class="card-text">Platform: {{ game.platform }}</h4>
+                <br />
+                <!-- game posted by -->
+                <p class="card-text text-muted">
+                    Posted by: {{ game.user.first_name }} {{ game.user.last_name
+                    }}
+                </p>
+            </div>
+        </div>
+    </body>
+</html>

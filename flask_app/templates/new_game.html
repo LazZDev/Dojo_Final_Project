@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!-- Document metadata -->
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <!-- Document title -->
+        <title>Free Games World</title>
+        <!-- External CSS stylesheet -->
+        <link
+            rel="stylesheet"
+            href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+            integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+            crossorigin="anonymous"
+        />
+    </head>
+    <body>
+        <!-- Navigation bar -->
+        <nav
+            class="d-flex justify-content-between align-items-center col-12 mt-2"
+        >
+            <!-- Title message - "Welcome to Free Games World" -->
+            <h1 class="ml-5 mt-2">Add a new game</h1>
+            <!-- Buttons -->
+            <div class="d-flex col-3 justify-content-around">
+                <!-- Button to go back to the games library dashboard -->
+                <a href="/dashboard" class="btn btn-primary">Dashboard</a>
+                <!-- Button to log out -->
+                <a href="/logout" class="btn btn-info">Logout</a>
+            </div>
+        </nav>
+        <!-- New game form -->
+        <div class="container">
+            <!-- Form to add a new game -->
+            <form
+                action="/create_game"
+                method="post"
+                class="col-12 p-4 my-4 text-dark"
+            >
+                <!-- Flash messages for game-related errors -->
+                {% with messages =
+                get_flashed_messages(category_filter=['game']) %} {% if messages
+                %} {% for message in messages %}
+                <!-- Display flash messages -->
+                <p>{{message}}</p>
+                {% endfor %} {% endif %} {% endwith %}
+                <!-- Hidden input field to store the user ID -->
+                <input type="hidden" name="user_id" value="{{ user.id }}" />
+                <!-- Form inputs -->
+                <div class="justify-content-between col-4">
+                    <!-- Input field for the title of the new game -->
+                    <div class="form-group">
+                        <label for="title">Title:</label>
+                        <input name="title" type="text" class="form-control" />
+                    </div>
+                    <!-- Input field for the genre of the new game -->
+                    <div class="form-group">
+                        <label for="genre">Genre:</label>
+                        <input name="genre" type="text" class="form-control" />
+                    </div>
+                    <!-- Input field for the rating of the new game -->
+                    <div class="form-group">
+                        <label for="rating">Rating:</label>
+                        <input name="rating" type="text" class="form-control" />
+                    </div>
+                    <!-- Input field for the description of the new game -->
+                    <div>
+                        <label for="description">Description:</label>
+                        <textarea
+                            name="description"
+                            cols="30"
+                            rows="5"
+                            class="form-control"
+                        ></textarea>
+                    </div>
+                    <!-- Input field for the release date of the new game -->
+                    <div>
+                        <label for="release_date">Release Date:</label>
+                        <input
+                            name="release_date"
+                            type="date"
+                            class="form-control"
+                        />
+                    </div>
+                    <!-- Input field for the developer of the new game -->
+                    <div>
+                        <label for="developer">Developer:</label>
+                        <input
+                            name="developer"
+                            type="text"
+                            class="form-control"
+                        />
+                    </div>
+                    <!-- Input field for the publisher of the new game -->
+                    <div>
+                        <label for="publisher">Publisher:</label>
+                        <input
+                            name="publisher"
+                            type="text"
+                            class="form-control"
+                        />
+                    </div>
+                    <!-- Input field for the platform of the new game -->
+                    <div>
+                        <label for="platform">Platform:</label>
+                        <input
+                            name="platform"
+                            type="text"
+                            class="form-control"
+                        />
+                    </div>
+                    <br />
+                    <!-- Submit button to add the new game -->
+                    <input type="submit" value="Add" class="btn btn-success" />
+                </div>
+            </form>
+        </div>
+    </body>
+</html>
