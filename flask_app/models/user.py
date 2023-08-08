@@ -1,55 +1,44 @@
 # Import necessary modules and classes
 from flask import flash
-from flask_app.models.user import User
 from flask_app.config.mysqlconnection import connectToMySQL
+import re
 
-db = "games_library"
+# Create a regular expression object that we'll use later
+EMAIL_REGEX = re.compile(r"^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$")
+
+# Database name
+db_name = "games_library"
 
 
-class Game:
-    # Constructor that initializes the attributes of the game object
-    def __init__(self, db_data):
-        self.id = db_data["id"]
-        self.title = db_data["title"]
-        self.genre = db_data["genre"]
-        self.rating = db_data["rating"]
-        self.description = db_data["description"]
-        self.release_date = db_data["release_date"]
-        self.developer = db_data["developer"]
-        self.publisher = db_data["publisher"]
-        self.platform = db_data["platform"]
-        self.created_at = db_data["created_at"]
-        self.updated_at = db_data["updated_at"]
-        self.user_id = db_data["user_id"]
+# User class
+class User:
+    # Constructor that initializes the attributes of the User object
+    def __init__(self, data):
+        self.id = data["id"]
+        self.first_name = data["first_name"]
+        self.last_name = data["last_name"]
+        self.email = data["email"]
+        self.password = data["password"]
+        self.created_at = data["created_at"]
+        self.updated_at = data["updated_at"]
 
-    # Class method to get a single game from the database along with the user who posted it
+    # Class method to get a user by their ID from the database
     @classmethod
-    def get_one_w_user(cls, data):
-        query = """ SELECT * FROM games JOIN users ON users.id = games.user_id WHERE games.id = %(id)s """
+    def get_one(cls, data):
+        query = """ SELECT * FROM users WHERE id = %(id)s """
         results = connectToMySQL(db_name).query_db(query, data)
-        game = cls(results[0])
-        posted_by_data = {
-            "id": results[0]["users.id"],
-            "first_name": results[0]["first_name"],
-            "last_name": results[0]["last_name"],
-            "email": results[0]["email"],
-            "password": results[0]["password"],
-            "created_at": results[0]["created_at"],
-            "updated_at": results[0]["updated_at"],
-        }
-        game.user = User(posted_by_data)
-        return game
+        return cls(results[0])
 
-    # Class method to get all games from the database along with the users who are selling them
+    # Class method to get a user with associated games from the database
     @classmethod
-    def get_all(cls):
-        query = """ SELECT * FROM games JOIN users ON users.id = games.user_id """
-        results = connectToMySQL(db_name).query_db(query)
-        games = []
+    def get_user_w_games(cls, user_id):
+        query = """ SELECT * FROM users
+        JOIN games ON games.user_id = users.id = %(id)s """
+        results = connectToMySQL(db_name).query_db(query, {"id": user_id})
+        user = cls(results[0])
         for row in results:
-            game = cls(row)
-            game_user = {
-                "id": row["users.id"],
+            game_data = {
+                "id": row["games.id"],
                 "first_name": row["first_name"],
                 "last_name": row["last_name"],
                 "email": row["email"],
@@ -57,77 +46,62 @@ class Game:
                 "created_at": row["users.created_at"],
                 "updated_at": row["users.updated_at"],
             }
-            game.user = User(game_user)
-            games.append(game)
-        return games
+            user = User(game_data)
+            user.append(game_data)
+        return user
 
-    # Class method to create a new game in the database
+    # Class method to get a user by their email from the database
     @classmethod
-    def create(cls, form_data):
-        query = """ INSERT INTO games (title, genre, rating, description, release_date, developer, publisher, platform,user_id) VALUES (%(title)s, %(genre)s, %(rating)s, %(description)s, %(release_date)s, %(developer)s, %(publisher)s, %(platform)s, %(user_id)s) """
-        results = connectToMySQL(db_name).query_db(query, form_data)
-        return results
-
-    # Class method to get a single game from the database based on its id
-    @classmethod
-    def get_one(cls, user_id):
-        query = """ SELECT * FROM games WHERE id = %(id)s """
-        results = connectToMySQL(db_name).query_db(query, user_id)
+    def get_by_email(cls, data):
+        query = """ SELECT * FROM users WHERE email = %(email)s """
+        results = connectToMySQL(db_name).query_db(query, data)
+        if len(results) < 1:
+            return False
         return cls(results[0])
 
-    # Class method to update a game in the database
+    # Class method to get a user by their ID from the database
     @classmethod
-    def update(cls, data):
-        query = """ UPDATE games SET price = %(price)s, model = %(model)s, make = %(make)s, year = %(year)s, description = %(description)s, updated_at = NOW() WHERE id = %(id)s """
-        return connectToMySQL(db_name).query_db(query, data)
+    def get_by_id(cls, data):
+        query = """ SELECT * FROM users WHERE id = %(id)s """
+        result = connectToMySQL(db_name).query_db(query, data)
+        return cls(result[0]) if result else None
 
-    # Class method to save a game to the database (either insert a new one or update an existing one)
+    # Class method to save a user to the database
     @classmethod
     def save(cls, data):
-        valid = cls.validate_game(data)
-        if not valid:
-            return False
-        if "id" in data:
-            # Update the existing game
-            query = """ UPDATE games SET price = %(price)s, model = %(model)s, make = %(make)s, year = %(year)s, description = %(description)s, updated_at = NOW() WHERE id = %(id)s """
-        else:
-            # Create a new game
-            query = """ INSERT INTO games (price, model, make, year, description, user_id) VALUES (%(price)s, %(model)s, %(make)s, %(year)s, %(description)s, %(user_id)s) """
+        query = """ INSERT INTO users (first_name, last_name, email, password)
+					VALUES (%(first_name)s, %(last_name)s, %(email)s, %(pw_hash)s) """
         return connectToMySQL(db_name).query_db(query, data)
 
-    # Class method to delete a game from the database
-    @classmethod
-    def delete(cls, data):
-        query = """ DELETE FROM games WHERE id = %(id)s """
-        return connectToMySQL(db_name).query_db(query, data)
-
-    # Static method to validate game data before saving or updating
+    # Static method to validate user data before saving
     @staticmethod
-    def validate_game(game):
+    def validate_user(user_data):
+        # Set is_valid to True
         is_valid = True
-        try:
-            price = int(game["price"])
-            if price < 0:
-                is_valid = False
-                flash("Price must be greater than 0", "game")
-        except:
+        # Test if the first name is at least 2 characters
+        if len(user_data["first_name"]) < 3:
+            flash("First name must be at least 3 characters", "register")
             is_valid = False
-            flash("Price must be an integer", "game")
-        if len(game["model"]) < 3:
+        # Test if the last name is at least 2 characters
+        if len(user_data["last_name"]) < 3:
+            flash("Last name must be at least 3 characters", "register")
             is_valid = False
-            flash("Model must be at least 3 characters", "game")
-        if len(game["make"]) < 3:
+        # Test whether email matches the EMAIL_REGEX pattern
+        if not EMAIL_REGEX.match(user_data["email"]):
+            flash("Email must have a valid email format", "register")
             is_valid = False
-            flash("Make must be at least 3 characters", "game")
-        try:
-            year = int(game["year"])
-            if year < 0:
-                is_valid = False
-                flash("Year must be greater than 0", "game")
-        except:
+        query = """ SELECT * FROM users WHERE email = %(email)s """
+        results = connectToMySQL(db_name).query_db(query, user_data)
+        # Test if the email is already being used
+        if len(results) != 0:
+            flash("This email is already being used", "register")
             is_valid = False
-            flash("Price must be an integer", "game")
-        if len(game["description"]) < 3:
+        # Test if the password is at least 8 characters
+        if len(user_data["password"]) < 8:
+            flash("Password must be at least 8 characters", "register")
             is_valid = False
-            flash("Description must be at least 3 characters", "game")
+        # Test if passwords match
+        if user_data["password"] != user_data["confirm_password"]:
+            flash("Password does not match", "register")
+            is_valid = False
         return is_valid
