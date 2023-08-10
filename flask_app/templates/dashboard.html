@@ -6,7 +6,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <!-- Document title -->
-        <title>Free Games World</title>
+        <title>Free Gaming Haven</title>
         <!-- External CSS stylesheet -->
         <link
             rel="stylesheet"
@@ -16,92 +16,37 @@
         />
     </head>
     <body>
-        <!-- Navigation bar -->
-        <nav class="navbar navbar-expand-lg navbar-light bg-dark">
-            <div class="container-fluid">
-                <a class="navbar-brand text-light" href="#">Games Library</a>
-                <button
-                    class="navbar-toggler"
-                    type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#navbarScroll"
-                    aria-controls="navbarScroll"
-                    aria-expanded="false"
-                    aria-label="Toggle navigation"
+        <div class="container">
+            <header
+                class="d-flex flex-wrap justify-content-between py-3 mb-4 border-bottom bg-dark text-light"
+            >
+                <span
+                    class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none"
                 >
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarScroll">
-                    <ul
-                        class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll"
-                        style="--bs-scroll-height: 100px"
-                    >
-                        <li class="nav-item">
-                            <a
-                                class="nav-link active"
-                                aria-current="page"
-                                href="#"
-                                >Home</a
-                            >
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Link</a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a
-                                class="nav-link dropdown-toggle"
-                                href="#"
-                                id="navbarScrollingDropdown"
-                                role="button"
-                                data-bs-toggle="dropdown"
-                                aria-expanded="false"
-                            >
-                                Link
-                            </a>
-                            <ul
-                                class="dropdown-menu"
-                                aria-labelledby="navbarScrollingDropdown"
-                            >
-                                <li>
-                                    <a class="dropdown-item" href="#">Action</a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item" href="#"
-                                        >Another action</a
-                                    >
-                                </li>
-                                <li><hr class="dropdown-divider" /></li>
-                                <li>
-                                    <a class="dropdown-item" href="#"
-                                        >Something else here</a
-                                    >
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="nav-item">
-                            <a
-                                class="nav-link disabled"
-                                href="#"
-                                tabindex="-1"
-                                aria-disabled="true"
-                                >Link</a
-                            >
-                        </li>
-                    </ul>
-                    <form class="d-flex">
-                        <input
-                            class="form-control me-2"
-                            type="search"
-                            placeholder="Search"
-                            aria-label="Search"
-                        />
-                        <button class="btn btn-outline-success" type="submit">
-                            Search
-                        </button>
-                    </form>
-                </div>
-            </div>
-        </nav>
+                    <svg class="bi me-2" width="40" height="32">
+                        <use xlink:href="#bootstrap"></use>
+                    </svg>
+                    <span class="fs-4 font-weight-bold">Free Gaming Haven</span>
+                </span>
+
+                <ul class="nav nav-pills">
+                    <li class="nav-item">
+                        <a
+                            href="/new_game"
+                            class="nav-link active"
+                            aria-current="page"
+                            >Add Game</a
+                        >
+                    </li>
+                    <li class="nav-item">
+                        <a href="" class="nav-link">Free Games</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/logout" class="nav-link">Logout</a>
+                    </li>
+                </ul>
+            </header>
+        </div>
         <br />
         <!-- Container for the games library table -->
         <div class="col-11">
@@ -189,11 +134,40 @@
                     {% endfor %}
                 </tbody>
             </table>
-            <div>
-                <a href="/new_game" class="btn btn-success float-right mt-2"
-                    >Add a Game</a
-                >
-            </div>
         </div>
+        <footer class="py-3 my-4 fixed-bottom border-top border-dark">
+            <ul
+                class="nav justify-content-center border-bottom border-dark pb-3 mb-3"
+            >
+                <li class="nav-item">
+                    <a href="#" class="nav-link px-2 text-body-secondary"
+                        >Home</a
+                    >
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link px-2 text-body-secondary"
+                        >Features</a
+                    >
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link px-2 text-body-secondary"
+                        >Pricing</a
+                    >
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link px-2 text-body-secondary"
+                        >FAQs</a
+                    >
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link px-2 text-body-secondary"
+                        >About</a
+                    >
+                </li>
+            </ul>
+            <p class="text-center text-body-secondary">
+                Made with ❤️ by Laz © 2023
+            </p>
+        </footer>
     </body>
 </html>

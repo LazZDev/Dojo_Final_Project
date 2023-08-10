@@ -6,7 +6,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <!-- Document title -->
-        <title>Free Games World</title>
+        <title>Free Gaming Haven</title>
         <!-- External CSS stylesheet -->
         <link
             rel="stylesheet"
@@ -17,19 +17,38 @@
     </head>
     <body>
         <!-- Navigation bar -->
-        <nav
-            class="d-flex justify-content-between align-items-center col-12 mt-2"
-        >
-            <!-- Title message - "Welcome to Free Games World" -->
-            <h1 class="ml-5 mt-2">Add a new game</h1>
-            <!-- Buttons -->
-            <div class="d-flex col-3 justify-content-around">
-                <!-- Button to go back to the games library dashboard -->
-                <a href="/dashboard" class="btn btn-primary">Dashboard</a>
-                <!-- Button to log out -->
-                <a href="/logout" class="btn btn-info">Logout</a>
-            </div>
-        </nav>
+        <div class="container">
+            <header
+                class="d-flex flex-wrap justify-content-between py-3 mb-4 border-bottom bg-dark text-light"
+            >
+                <a
+                    href="/dashboard"
+                    class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none"
+                >
+                    <svg class="bi me-2" width="40" height="32">
+                        <use xlink:href="#bootstrap"></use>
+                    </svg>
+                    <span class="fs-4 font-weight-bold">Free Gaming Haven</span>
+                </a>
+
+                <ul class="nav nav-pills">
+                    <li class="nav-item">
+                        <a
+                            href="/new_game"
+                            class="nav-link active"
+                            aria-current="page"
+                            >Add Game</a
+                        >
+                    </li>
+                    <li class="nav-item">
+                        <a href="" class="nav-link">Free Games</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/logout" class="nav-link">Logout</a>
+                    </li>
+                </ul>
+            </header>
+        </div>
         <!-- New game form -->
         <div class="container">
             <!-- Form to add a new game -->

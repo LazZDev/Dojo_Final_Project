@@ -6,8 +6,9 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <!-- Document title -->
-        <title>Free Games World</title>
+        <title>Free Gaming Haven</title>
         <!-- External CSS stylesheet -->
+        <link rel="stylesheet" href="/static/style.css" />
         <link
             rel="stylesheet"
             href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -19,13 +20,9 @@
         <!-- Flex container with two forms -->
         <div class="d-flex justify-content-around mt-5">
             <!-- Registration form -->
-            <form
-                action="/register"
-                method="post"
-                class="col-2 p-3 bg-dark text-light"
-            >
+            <form action="/register" method="post" class="col-2 p-3 text-light">
                 <!-- Registration form title -->
-                <h2 class="text-primary">Register</h2>
+                <h4 class="text-primary">Create Account</h4>
                 <!-- Flash messages for registration errors -->
                 {% with messages =
                 get_flashed_messages(category_filter=['register']) %} {% if
@@ -83,13 +80,9 @@
                 <input type="submit" value="Register" class="btn btn-primary" />
             </form>
             <!-- Login form -->
-            <form
-                action="/login"
-                method="post"
-                class="col-2 p-3 bg-dark text-light"
-            >
+            <form action="/login" method="post" class="col-2 p-3 text-light">
                 <!-- Login form title -->
-                <h2 class="text-success">Login</h2>
+                <h4 class="text-success">Login</h4>
                 <!-- Flash messages for login errors -->
                 {% with messages =
                 get_flashed_messages(category_filter=['login']) %} {% if
