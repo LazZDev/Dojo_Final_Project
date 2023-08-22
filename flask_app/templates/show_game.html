@@ -15,41 +15,40 @@
             crossorigin="anonymous"
         />
     </head>
-    <body>
-        <!-- Navigation bar -->
-        <nav
-            class="d-flex justify-content-between align-items-center col-12 mt-2"
-        >
-            <!-- Welcome message -->
-            <h1 class="ml-5">Game Information</h1>
-            <!-- Buttons -->
-            <div class="d-flex col-3 justify-content-around">
-                <!-- Button to go back to the games library dashboard -->
-                <a href="/dashboard" class="btn btn-primary float-right"
-                    >Dashboard</a
+    <body class="bg-dark">
+        <div class="container">
+            <header
+                class="d-flex justify-content-between py-3 mb-4 border-bottom bg-light text-dark"
+            >
+                <a href="/dashboard" class="btn btn-primary ml-2">
+                    Free Gaming Haven</a
                 >
-                <!-- Button to log out -->
-                <a href="/logout" class="btn btn-info float-right">Logout</a>
-            </div>
-        </nav>
+                <ul class="nav nav-pills">
+                    <li class="nav-item">
+                        <a href="/new_game" class="btn btn-primary mr-2">
+                            + New Game</a
+                        >
+                    </li>
+                    <li class="nav-item">
+                        <a href="/logout" class="btn btn-info mr-2">Logout</a>
+                    </li>
+                </ul>
+            </header>
+        </div>
         <div
-            class="card col-9 mx-auto my-5 text-dark font-weight-bold border-dark"
+            class="card col-9 mx-auto my-5 bg-light text-dark font-weight-bold border-dark"
         >
             <div class="card-body">
                 <!-- game title -->
-                <h2 class="card-text">Title: {{ game.title }}</h2>
+                <h2 class="card-text">Game Title: {{ game.title }}</h2>
                 <br />
-                <!-- game genre -->
-                <h4 class="card-text">Genre: {{ game.genre }}</h4>
-                <br />
-                <!-- game rating -->
-                <h4 class="card-text">Rating: {{ game.rating }}</h4>
-                <br />
-                <!-- game description -->
-                <h4 class="card-text">Description: {{ game.description }}</h4>
+                <h4 class="card-text">Description:</h4>
+                <h5>{{ game.description }}</h5>
                 <br />
                 <!-- game release date -->
-                <h4 class="card-text">Release Date: {{ game.release_date }}</h4>
+                <h4 class="card-text">
+                    Release Date: {{ game.release_date.strftime("%m-%d-%Y") }}
+                </h4>
                 <br />
                 <!-- game developer -->
                 <h4 class="card-text">Developer: {{ game.developer }}</h4>
@@ -61,11 +60,14 @@
                 <h4 class="card-text">Platform: {{ game.platform }}</h4>
                 <br />
                 <!-- game posted by -->
-                <p class="card-text text-muted">
+                <p class="card-text text-muted text-right">
                     Posted by: {{ game.user.first_name }} {{ game.user.last_name
                     }}
                 </p>
             </div>
         </div>
+        <footer class="py-3 my-4 fixed-bottom border-top border-light">
+            <p class="text-center text-light">Made with ❤️ by Laz © 2023</p>
+        </footer>
     </body>
 </html>

@@ -57,11 +57,14 @@ def update_game():
         return redirect("/logout")
     data = {
         "id": request.form["id"],
-        "price": int(request.form["price"]),
-        "model": request.form["model"],
-        "make": request.form["make"],
-        "year": int(request.form["year"]),
+        "title": request.form["title"],
+        "genre": request.form["genre"],
+        "rating": request.form["rating"],
         "description": request.form["description"],
+        "release_date": request.form["release_date"],
+        "developer": request.form["developer"],
+        "publisher": request.form["publisher"],
+        "platform": request.form["platform"],
         "user_id": session["user_id"],
     }
     if not Game.validate_game(request.form):
@@ -80,10 +83,9 @@ def show_game(game_id):
         return redirect("/")
     # Retrieve the detailed information about the game from the database
     data = {"id": game_id}
-    game = game.get_one_w_user(data)
+    game = Game.get_one_w_user(data)
     return render_template("show_game.html", game=game)
     # Render the game_info template with game and user data
-
 
 # Route for deleting a game
 @app.get("/delete_game/<int:id>")

@@ -15,36 +15,18 @@
             crossorigin="anonymous"
         />
     </head>
-    <body>
+    <body class="bg-dark">
         <!-- Navigation bar -->
         <div class="container">
             <header
-                class="d-flex flex-wrap justify-content-between py-3 mb-4 border-bottom bg-dark text-light"
+                class="d-flex flex-wrap justify-content-between py-3 mb-4 border-bottom bg-light"
             >
-                <a
-                    href="/dashboard"
-                    class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none"
+                <a href="/dashboard" class="btn btn-primary ml-2">
+                    Free Gaming Haven</a
                 >
-                    <svg class="bi me-2" width="40" height="32">
-                        <use xlink:href="#bootstrap"></use>
-                    </svg>
-                    <span class="fs-4 font-weight-bold">Free Gaming Haven</span>
-                </a>
-
                 <ul class="nav nav-pills">
                     <li class="nav-item">
-                        <a
-                            href="/new_game"
-                            class="nav-link active"
-                            aria-current="page"
-                            >Add Game</a
-                        >
-                    </li>
-                    <li class="nav-item">
-                        <a href="" class="nav-link">Free Games</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="/logout" class="nav-link">Logout</a>
+                        <a href="/logout" class="btn btn-info mr-2">Logout</a>
                     </li>
                 </ul>
             </header>
@@ -55,7 +37,7 @@
             <form
                 action="/create_game"
                 method="post"
-                class="col-12 p-4 my-4 text-dark"
+                class="col-12 p-4 my-4 text-light font-weight-bold border-dark"
             >
                 <!-- Flash messages for game-related errors -->
                 {% with messages =
@@ -131,7 +113,11 @@
                     </div>
                     <br />
                     <!-- Submit button to add the new game -->
-                    <input type="submit" value="Add" class="btn btn-success" />
+                    <input
+                        type="submit"
+                        value="Add Game"
+                        class="btn btn-success"
+                    />
                 </div>
             </form>
         </div>
