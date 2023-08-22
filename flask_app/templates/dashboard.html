@@ -61,7 +61,7 @@
                         <td class="col-3">Actions</td>
                     </tr>
                 </thead>
-                <tbody class="">
+                <tbody>
                     <!-- Loop through each Games -->
                     {% for game in all_games %}
                     <tr>
@@ -88,7 +88,7 @@
                             {% if game.user_id == session.user_id %}
                             <!-- If the user is the creator, show links for editing and deleting the game -->
                             <a
-                                class="btn btn-primary mb-4 mr-2"
+                                class="btn btn-primary mb-4 ml-2 mr-2"
                                 href="/show_game/{{ game.id }}"
                                 >view</a
                             >
