@@ -15,10 +15,10 @@
             crossorigin="anonymous"
         />
     </head>
-    <body>
+    <body class="bg-dark">
         <div class="container">
             <header
-                class="d-flex flex-wrap justify-content-between py-3 mb-4 border-bottom bg-dark text-light"
+                class="d-flex justify-content-between py-3 mb-4 border-bottom bg-light text-dark"
             >
                 <span
                     class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none"
@@ -26,46 +26,39 @@
                     <svg class="bi me-2" width="40" height="32">
                         <use xlink:href="#bootstrap"></use>
                     </svg>
-                    <span class="fs-4 font-weight-bold">Free Gaming Haven</span>
+                    <span class="text-dark fs-4 font-weight-bold"
+                        >Free Gaming Haven</span
+                    >
                 </span>
 
                 <ul class="nav nav-pills">
                     <li class="nav-item">
-                        <a
-                            href="/new_game"
-                            class="nav-link active"
-                            aria-current="page"
-                            >Add Game</a
+                        <a href="/new_game" class="btn btn-primary mr-2">
+                            + New Game</a
                         >
                     </li>
                     <li class="nav-item">
-                        <a href="" class="nav-link">Free Games</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="/logout" class="nav-link">Logout</a>
+                        <a href="/logout" class="btn btn-info mr-2">Logout</a>
                     </li>
                 </ul>
             </header>
         </div>
         <br />
         <!-- Container for the games library table -->
-        <div class="col-11">
+        <div class="col-12 ml-4">
             <!-- games library table -->
             <table
-                class="table-bordered table-hover col-12 ml-5 font-weight-bold border-dark"
+                class="table-bordered table-hover col-11 ml-5 text-center table-light"
             >
                 <!-- Table header -->
-                <thead class="bg-secondary">
+                <thead class="bg-primary text-light">
                     <!-- Table header row -->
                     <tr>
-                        <td>Title</td>
-                        <td>Genre</td>
-                        <td>Rating</td>
-                        <td>Description</td>
-                        <td>Release Date</td>
-                        <td>Developer</td>
-                        <td>Publisher</td>
-                        <td>Platform</td>
+                        <td class="col-3">Game Title</td>
+                        <td class="col-3">Genre</td>
+                        <td class="col-3">Release Date</td>
+                        <td class="col-3">Posted By</td>
+                        <td class="col-3">Actions</td>
                     </tr>
                 </thead>
                 <tbody class="">
@@ -77,46 +70,35 @@
                             <p><b>{{ game.title }}</b></p>
                         </td>
                         <!-- Display game genre -->
-                        <td>
+                        <td class="col-3">
                             <p>{{ game.genre }}</p>
                         </td>
-                        <!-- Display game rating -->
-                        <td>
-                            <p>{{ game.rating }}</p>
+                        <td class="col-3">
+                            <p>{{ game.release_date.strftime("%m-%d-%Y") }}</p>
                         </td>
-                        <!-- Display game description -->
-                        <td>
-                            <p>{{ game.description }}</p>
-                        </td>
-                        <!-- Display game release date -->
-                        <td>
-                            <p>{{ game.release_date }}</p>
-                        </td>
-                        <!-- Display game developer -->
-                        <td>
-                            <p>{{ game.developer }}</p>
-                        </td>
-                        <!-- Display game publisher -->
-                        <td>
-                            <p>{{ game.publisher }}</p>
-                        </td>
-                        <td>
+                        <!-- Display game posted by -->
+                        <td class="col-3">
                             <p>
                                 {{ game.user.first_name }} {{
                                 game.user.last_name }}
                             </p>
                         </td>
                         <!-- Check if the current user is the creator of the game -->
-                        <td>
+                        <td class="d-flex mt-3 align-items-center">
                             {% if game.user_id == session.user_id %}
                             <!-- If the user is the creator, show links for editing and deleting the game -->
                             <a
-                                class="btn btn-warning mr-2"
+                                class="btn btn-primary mb-4 mr-2"
+                                href="/show_game/{{ game.id }}"
+                                >view</a
+                            >
+                            <a
+                                class="btn btn-warning mb-4 mr-2"
                                 href="/edit_game/{{ game.id }}"
                                 >edit</a
                             >
                             <a
-                                class="btn btn-danger"
+                                class="btn btn-danger mb-4 mr-2"
                                 href="/delete_game/{{ game.id }}"
                                 >delete</a
                             >
@@ -124,7 +106,7 @@
                             {% elif game.user_id != session.user_id %}
                             <!-- show only a link for viewing the game details -->
                             <a
-                                class="btn btn-primary mr-3"
+                                class="btn btn-primary mb-4 ml-2 mr-2"
                                 href="/show_game/{{ game.id }}"
                                 >view</a
                             >
@@ -135,39 +117,8 @@
                 </tbody>
             </table>
         </div>
-        <footer class="py-3 my-4 fixed-bottom border-top border-dark">
-            <ul
-                class="nav justify-content-center border-bottom border-dark pb-3 mb-3"
-            >
-                <li class="nav-item">
-                    <a href="#" class="nav-link px-2 text-body-secondary"
-                        >Home</a
-                    >
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link px-2 text-body-secondary"
-                        >Features</a
-                    >
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link px-2 text-body-secondary"
-                        >Pricing</a
-                    >
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link px-2 text-body-secondary"
-                        >FAQs</a
-                    >
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link px-2 text-body-secondary"
-                        >About</a
-                    >
-                </li>
-            </ul>
-            <p class="text-center text-body-secondary">
-                Made with ❤️ by Laz © 2023
-            </p>
+        <footer class="py-3 my-4 fixed-bottom border-top border-light">
+            <p class="text-center text-light">Made with ❤️ by Laz © 2023</p>
         </footer>
     </body>
 </html>
