@@ -37,7 +37,7 @@
             <form
                 action="/create_game"
                 method="post"
-                class="col-12 p-4 my-4 text-light font-weight-bold border-dark"
+                class="col-12 p-4 my-4 text-light border-dark"
             >
                 <!-- Flash messages for game-related errors -->
                 {% with messages =
@@ -49,7 +49,7 @@
                 <!-- Hidden input field to store the user ID -->
                 <input type="hidden" name="user_id" value="{{ user.id }}" />
                 <!-- Form inputs -->
-                <div class="justify-content-between col-4">
+                <div class="align-items-center col-5">
                     <!-- Input field for the title of the new game -->
                     <div class="form-group">
                         <label for="title">Title:</label>

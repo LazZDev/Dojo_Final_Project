@@ -16,34 +16,42 @@
         />
     </head>
     <body class="bg-dark">
-        <header
-            class="d-flex justify-content-between py-3 mb-4 border-bottom bg-light text-dark"
-        >
-            <a href="/dashboard" class="btn btn-primary ml-2">
-                Free Gaming Haven</a
+        <div class="container">
+            <header
+                class="d-flex justify-content-between py-3 mb-4 border-bottom bg-light text-dark"
             >
-            <ul class="nav nav-pills">
-                <li class="nav-item">
-                    <a href="/logout" class="btn btn-info mr-2">Logout</a>
-                </li>
-            </ul>
-        </header>
+                <a href="/dashboard" class="btn btn-primary ml-2">
+                    Free Gaming Haven</a
+                >
+                <ul class="nav nav-pills">
+                    <li class="nav-item">
+                        <a href="/new_game" class="btn btn-primary mr-2">
+                            + New Game</a
+                        >
+                    </li>
+                    <li class="nav-item">
+                        <a href="/logout" class="btn btn-info mr-2">Logout</a>
+                    </li>
+                </ul>
+            </header>
+        </div>
         <!-- Edit game form -->
-        <form
-            action="/update_game"
-            method="post"
-            class="col-11 p-4 my-4 text-light border-dark"
-        >
-            <!-- Hidden input field for game ID -->
-            <input type="hidden" name="id" value="{{edit.id}}" />
-            <!-- Flash messages for game-related errors -->
-            {% with messages = get_flashed_messages(category_filter=['game']) %}
-            {% if messages %} {% for message in messages %}
-            <!-- Display flash messages -->
-            <p>{{message}}</p>
-            {% endfor %} {% endif %} {% endwith %}
-            <div class="d-flex justify-content-between col-10">
-                <div class="col-4">
+        <div class="container">
+            <form
+                action="/update_game"
+                method="post"
+                class="col-12 p-4 my-4 text-light border-dark"
+            >
+                <!-- Hidden input field for game ID -->
+                <input type="hidden" name="id" value="{{edit.id}}" />
+                <!-- Flash messages for game-related errors -->
+                {% with messages =
+                get_flashed_messages(category_filter=['game']) %} {% if messages
+                %} {% for message in messages %}
+                <!-- Display flash messages -->
+                <p>{{message}}</p>
+                {% endfor %} {% endif %} {% endwith %}
+                <div class="align-items-center col-5">
                     <!-- Input field for game title with the existing value populated for editing -->
                     <div class="form-group">
                         <label for="title">Title:</label>
@@ -130,7 +138,7 @@
                         class="btn btn-success"
                     />
                 </div>
-            </div>
-        </form>
+            </form>
+        </div>
     </body>
 </html>

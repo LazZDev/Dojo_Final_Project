@@ -41,24 +41,19 @@
             <div class="card-body">
                 <!-- game title -->
                 <h2>{{ game.title }}</h2>
-                <br />
-                <h4 class="card-text">Description:</h4>
-                <h5>{{ game.description }}</h5>
-                <br />
-                <!-- game release date -->
-                <h4 class="card-text">
-                    Release Date: {{ game.release_date.strftime("%m-%d-%Y") }}
-                </h4>
-                <br />
+                <hr />
+                <h4 class="card-text text-primary">Description</h4>
+                <p>{{ game.description }}</p>
                 <!-- game developer -->
-                <h4 class="card-text">Developer: {{ game.developer }}</h4>
-                <br />
+                <h4 class="card-text text-primary">Developer</h4>
+                <p>{{ game.developer }}</p>
                 <!-- game publisher -->
-                <h4 class="card-text">Publisher: {{ game.publisher }}</h4>
-                <br />
+                <h4 class="card-text text-primary">Publisher</h4>
+                <p>{{ game.publisher }}</p>
                 <!-- game platform -->
-                <h4 class="card-text">Platform: {{ game.platform }}</h4>
-                <br />
+                <h4 class="card-text text-primary">Platform</h4>
+                <p>{{ game.platform }}</p>
+                <hr />
                 <!-- game posted by -->
                 <p class="card-text text-muted text-right">
                     Posted by: {{ game.user.first_name }} {{ game.user.last_name
@@ -66,8 +61,5 @@
                 </p>
             </div>
         </div>
-        <footer class="py-3 my-4 fixed-bottom border-top border-light">
-            <p class="text-center text-light">Made with ❤️ by Laz © 2023</p>
-        </footer>
     </body>
 </html>

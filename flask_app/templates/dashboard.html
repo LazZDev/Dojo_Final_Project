@@ -47,9 +47,7 @@
         <!-- Container for the games library table -->
         <div class="col-12 ml-4">
             <!-- games library table -->
-            <table
-                class="table-bordered table-hover col-11 ml-5 text-center table-light"
-            >
+            <table class="table-hover col-11 ml-5 text-center table-light">
                 <!-- Table header -->
                 <thead class="bg-primary text-light">
                     <!-- Table header row -->
@@ -66,21 +64,28 @@
                     {% for game in all_games %}
                     <tr>
                         <!-- Display game title -->
-                        <td class="col-3">
+                        <td>
                             <p><b>{{ game.title }}</b></p>
                         </td>
                         <!-- Display game genre -->
-                        <td class="col-3">
-                            <p>{{ game.genre }}</p>
+                        <td>
+                            <p><b>{{ game.genre }}</b></p>
                         </td>
-                        <td class="col-3">
-                            <p>{{ game.release_date.strftime("%m-%d-%Y") }}</p>
+                        <td>
+                            <p>
+                                <b
+                                    >{{ game.release_date.strftime("%m-%d-%Y")
+                                    }}</b
+                                >
+                            </p>
                         </td>
                         <!-- Display game posted by -->
-                        <td class="col-3">
+                        <td>
                             <p>
-                                {{ game.user.first_name }} {{
-                                game.user.last_name }}
+                                <b>
+                                    {{ game.user.first_name }} {{
+                                    game.user.last_name }}</b
+                                >
                             </p>
                         </td>
                         <!-- Check if the current user is the creator of the game -->
