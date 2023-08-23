@@ -26,7 +26,7 @@
                     <svg class="bi me-2" width="40" height="32">
                         <use xlink:href="#bootstrap"></use>
                     </svg>
-                    <span class="text-dark fs-4 font-weight-bold"
+                    <span class="badge badge-success text-light fs-4"
                         >Free Gaming Haven</span
                     >
                 </span>
@@ -69,7 +69,9 @@
                         </td>
                         <!-- Display game genre -->
                         <td>
-                            <p><b>{{ game.genre }}</b></p>
+                            <p class="badge badge-secondary">
+                                {{ game.genre }}
+                            </p>
                         </td>
                         <!-- Display game rating -->
                         <td>
@@ -117,8 +119,5 @@
                 </tbody>
             </table>
         </div>
-        <footer class="py-3 my-4 fixed-bottom border-top border-light">
-            <p class="text-center text-light">Made with ❤️ by Laz © 2023</p>
-        </footer>
     </body>
 </html>

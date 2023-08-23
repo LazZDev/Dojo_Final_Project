@@ -20,7 +20,7 @@
             <header
                 class="d-flex justify-content-between py-3 mb-4 border-bottom bg-light text-dark"
             >
-                <a href="/dashboard" class="btn btn-primary ml-2">
+                <a href="/dashboard" class="btn btn-success ml-2">
                     Free Gaming Haven</a
                 >
                 <ul class="nav nav-pills">
@@ -40,7 +40,8 @@
         >
             <div class="card-body">
                 <!-- game title -->
-                <h2>{{ game.title }}</h2>
+                <h2 class="d-flex">{{ game.title }}</h2>
+                <span class="badge badge-primary py-2 px-2 mb-2">FREE</span>
                 <hr />
                 <h4 class="card-text text-primary">Description</h4>
                 <p>{{ game.description }}</p>
