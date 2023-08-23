@@ -52,10 +52,10 @@
                 <thead class="bg-primary text-light">
                     <!-- Table header row -->
                     <tr>
-                        <td class="col-3">Game Title</td>
+                        <td class="col-3">Title</td>
                         <td class="col-3">Genre</td>
+                        <td class="col-3">Rating</td>
                         <td class="col-3">Release Date</td>
-                        <td class="col-3">Posted By</td>
                         <td class="col-3">Actions</td>
                     </tr>
                 </thead>
@@ -71,20 +71,15 @@
                         <td>
                             <p><b>{{ game.genre }}</b></p>
                         </td>
+                        <!-- Display game rating -->
+                        <td>
+                            <p><b>{{ game.rating }}</b></p>
+                        </td>
                         <td>
                             <p>
                                 <b
                                     >{{ game.release_date.strftime("%m-%d-%Y")
                                     }}</b
-                                >
-                            </p>
-                        </td>
-                        <!-- Display game posted by -->
-                        <td>
-                            <p>
-                                <b>
-                                    {{ game.user.first_name }} {{
-                                    game.user.last_name }}</b
                                 >
                             </p>
                         </td>
